@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles';
-import App from './App';
+import routes from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyles />
-    <App />
+    <BrowserRouter>
+      <Switch>
+        {routes}
+      </Switch>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );
