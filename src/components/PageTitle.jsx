@@ -1,0 +1,55 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import tw, { styled, theme, css } from 'twin.macro';
+import { maxWidth, rootWidth } from '../styles/variables';
+import titlePaint from '../assets/svg/titlePaint.svg';
+
+const TitleContainer = tw.div`relative w-full flex flex-col items-center my-2`;
+const TitlePaint = styled.img(() => [
+  css`max-width: ${maxWidth * 0.75}px;`,
+  tw`w-full opacity-75`,
+]);
+const Svg = tw.svg`absolute inset-0 md:my-8`;
+const SvgText = styled.text`
+  fill: ${theme`colors.paper`};
+  font-size: 36px;
+  letter-spacing: 1px;
+  @media (min-width: 600px) {
+    font-size: 28px;
+  }
+`;
+
+const CurvedTitle = ({ title }) => (
+  <Svg width={rootWidth} height={125 + rootWidth / 10} viewBox="0 0 300 10">
+    <path
+      id="curve"
+      fill="transparent"
+      d="M1.70334 101C1.70334 48.6867 73.9199 1.59689 154.963 1.59689C236.005 1.59689 307.703 48.6867 307.703 101"
+    />
+    <SvgText>
+      <textPath xlinkHref="#curve" startOffset="50%" textAnchor="middle">
+        {title}
+      </textPath>
+    </SvgText>
+  </Svg>
+);
+
+CurvedTitle.propTypes = { title: PropTypes.string };
+CurvedTitle.defaultProps = { title: '' };
+
+const PageTitle = ({ title }) => (
+  <TitleContainer>
+    <TitlePaint src={titlePaint} alt="" />
+    <CurvedTitle title={title} />
+  </TitleContainer>
+);
+
+PageTitle.propTypes = {
+  title: PropTypes.string,
+};
+
+PageTitle.defaultProps = {
+  title: '',
+};
+
+export default PageTitle;
