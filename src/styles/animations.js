@@ -1,18 +1,24 @@
 import { keyframes } from 'styled-components';
 
 export const titleAnimation = keyframes`
-  0% { height: 100px; width: 100px }
-  100% { height: 200px; width: 200px }
+  0% { transform: translate(-100%) }
+  10% { transform: translate(-100%) }
+  25% { transform: translate(10%) scaleX(1.2); }
+  50% { transform: translate(-25%) scaleX(0.3); }
+  70% { transform: translate(5%) scaleX(1.1); }
+  85% { transform: translate(-5%) scaleX(0.85); }
+  95% { transform: translate(1%) }
+  100% { transform: translate(0%) }
 `;
 
 export const barilletAnimation = keyframes`
   0% {margin-top: -50% }
-  90% {margin-top: 5% }
+  50% {margin-top: 5% }
   100% {margin-top: 0% }
 `;
 
 export const barilletRotationAnimation = keyframes`
-  0% { transform: rotate('5deg) }
+  0% { transform: rotate(0deg) }
   8% { transform: rotate(75deg) }
   10% {transform: rotate(60deg) }
   24% { transform: rotate(135deg) }

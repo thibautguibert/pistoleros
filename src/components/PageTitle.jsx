@@ -12,20 +12,22 @@ const TitlePaint = styled.img(() => [
   css`max-width: ${maxWidth * 0.75}px;`,
 ]);
 const Barillet = styled.img(() => [
-  tw`absolute w-9 top-11`,
+  tw`absolute w-8 top-12 md:w-12 md:top-20`,
   css`
   left: 43%;
   animation-name: ${barilletAnimation}, ${barilletRotationAnimation} ;
   animation-duration: 3s, 7500ms;
   animation-delay: 0s, 3s;
   animation-iteration-count: 1, infinite;
+  @media (min-width: ${maxWidth}px){ left: 45%; }
+  @media (max-width: 359px){ width: 1.75rem; }
   `,
 ]);
 const Svg = styled.svg(() => [
   tw`absolute inset-0 md:my-8`,
   css`
     animation-name: ${titleAnimation} ;
-    animation-duration: 3s;
+    animation-duration: 2500ms;
     animation-iteration-count: 1;
   `,
 ]);
@@ -56,20 +58,22 @@ const CurvedTitle = ({ title }) => (
 CurvedTitle.propTypes = { title: PropTypes.string };
 CurvedTitle.defaultProps = { title: '' };
 
-const PageTitle = ({ title }) => (
+const PageTitle = ({ title, hasBarillet }) => (
   <TitleContainer>
     <TitlePaint src={titlePaint} alt="" />
-    <Barillet src={barillet} alt="" />
+    {hasBarillet && <Barillet src={barillet} alt="" />}
     <CurvedTitle title={title} />
   </TitleContainer>
 );
 
 PageTitle.propTypes = {
   title: PropTypes.string,
+  hasBarillet: PropTypes.bool,
 };
 
 PageTitle.defaultProps = {
   title: '',
+  hasBarillet: false,
 };
 
 export default PageTitle;
