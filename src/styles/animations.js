@@ -32,3 +32,17 @@ export const barilletRotationAnimation = keyframes`
   88% { transform: rotate(375deg) }
   90% {transform: rotate(360deg) }
 `;
+
+export const doorAnimation = (position, isMobile) => {
+  const xTranslation = isMobile ? '100' : '150';
+  const direction = position === 'left' ? -1 : 1;
+  return (
+    keyframes`
+  0% { transform: perspective(900px) translateZ(0px) translateX(0px) translateY(0px)rotateY(0deg)
+    ${position === 'right' ? 'scaleX(-1)' : ''} };
+  100% { transform: perspective(0px) translateZ(-300px) translateY(0px)
+    translateX(${xTranslation * direction}px) rotateY(${direction * -105}deg)
+    ${position === 'right' ? 'scaleX(-1)' : ''}
+  };
+`);
+};

@@ -7,7 +7,7 @@ import saloonBackground from '../assets/backgrounds/saloonBackground.jpg';
 const TopRightPaint = tw.img`absolute top-0 right-0 w-5/12 opacity-60`;
 
 const PageContainerStyle = styled.div(({ background, bgOpacity }) => [
-  tw`h-full w-full flex flex-col items-center relative`,
+  tw`h-full w-full flex flex-col items-center relative overflow-hidden`,
   css`&:before {
         content: "";
         background: center / cover url(${background || saloonBackground});
