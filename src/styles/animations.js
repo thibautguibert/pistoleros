@@ -30,7 +30,6 @@ export const barilletRotationAnimation = keyframes`
   72% { transform: rotate(315deg) }
   74% {transform: rotate(300deg) }
   88% { transform: rotate(375deg) }
-  90% {transform: rotate(360deg) }
 `;
 
 export const doorAnimation = (position, isMobile) => {
@@ -45,4 +44,13 @@ export const doorAnimation = (position, isMobile) => {
     ${position === 'right' ? 'scaleX(-1)' : ''}
   };
 `);
+};
+
+export const gunsToCenterAnimation = (position) => {
+  const direction = position === 'left' ? -1 : 1;
+  return (
+    keyframes`
+  0% { transform: translateX(${direction * 120}%) translateY(-120%) rotate(-360deg) }
+  100% { transform: translateX(0%) translateY(0%) rotate(${direction * 16}deg)}
+  `);
 };

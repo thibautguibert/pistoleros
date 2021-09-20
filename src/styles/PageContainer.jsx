@@ -14,6 +14,7 @@ const PageContainerStyle = styled.div(({ background, bgOpacity }) => [
         position: absolute;
         inset: 0;
         opacity: ${bgOpacity};
+        transition: opacity 2500ms;
     }`,
 ]);
 

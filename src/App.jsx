@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import tw, { styled, css } from 'twin.macro';
-import { useHistory } from 'react-router-dom';
 import PageContainer from './styles/PageContainer';
 import PageTitle from './components/PageTitle';
+import { isMobile, maxWidth } from './styles/variables';
 import { doorAnimation } from './styles/animations';
 
 import saloonBackground from './assets/backgrounds/saloonBackground.jpg';
 import saloonDoor from './assets/saloonDoor.png';
-import { isMobile, maxWidth } from './styles/variables';
 
 const DoorsContainer = tw.div`relative h-full w-full flex items-center justify-between`;
 const launchDoorAnimation = (position, launchAnimation) => {
@@ -31,19 +30,23 @@ const SaloonDoor = styled.img(({ position, animation }) => ([
 ]));
 
 function App() {
-  const [animation, setAnimation] = useState(false);
-  const history = useHistory();
-  const goToHomePage = () => {
-    setAnimation(true);
-    setTimeout(() => history.push('/homepage'), 2000);
+  const [doors, setDoors] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
+  const transitionToMenu = () => {
+    setDoors(false);
+    setTimeout(() => setShowMenu(true), 2500);
   };
   return (
-    <PageContainer background={saloonBackground} bgOpacity={0.5}>
-      <PageTitle title="Pist leros" hasBarillet />
-      <DoorsContainer onClick={goToHomePage}>
-        <SaloonDoor src={saloonDoor} alt="saloon door" position="left" animation={animation} />
-        <SaloonDoor src={saloonDoor} alt="saloon door" position="right" animation={animation} />
-      </DoorsContainer>
+    <PageContainer background={saloonBackground} bgOpacity={doors ? 0.25 : 0.75}>
+      <PageTitle title="Pist leros" hasBarillet gunsPosition={showMenu ? 'centered' : undefined} />
+      {showMenu ? (
+        <div>card menu</div>
+      ) : (
+        <DoorsContainer onClick={transitionToMenu}>
+          <SaloonDoor src={saloonDoor} alt="saloon door" position="left" animation={!doors} />
+          <SaloonDoor src={saloonDoor} alt="saloon door" position="right" animation={!doors} />
+        </DoorsContainer>
+      )}
     </PageContainer>
   );
 }
