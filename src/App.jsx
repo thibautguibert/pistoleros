@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import tw, { styled, css } from 'twin.macro';
 import PageContainer from './styles/PageContainer';
 import PageTitle from './components/PageTitle';
+import CardsMenu from './components/CardsMenu';
 import { isMobile, maxWidth } from './styles/variables';
 import { doorAnimation } from './styles/animations';
 
@@ -40,7 +41,7 @@ function App() {
     <PageContainer background={saloonBackground} bgOpacity={doors ? 0.25 : 0.75}>
       <PageTitle title="Pist leros" hasBarillet gunsPosition={showMenu ? 'centered' : undefined} />
       {showMenu ? (
-        <div>card menu</div>
+        <CardsMenu />
       ) : (
         <DoorsContainer onClick={transitionToMenu}>
           <SaloonDoor src={saloonDoor} alt="saloon door" position="left" animation={!doors} />
