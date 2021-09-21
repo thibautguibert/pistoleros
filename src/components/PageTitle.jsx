@@ -34,7 +34,6 @@ const Svg = styled.svg(() => [
   css`
     animation-name: ${titleAnimation} ;
     animation-duration: 2500ms;
-    animation-iteration-count: 1;
   `,
 ]);
 const SvgText = styled.text`

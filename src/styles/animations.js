@@ -54,3 +54,19 @@ export const gunsToCenterAnimation = (position) => {
   100% { transform: translateX(0%) translateY(0%) rotate(${direction * 16}deg)}
   `);
 };
+
+export const cardMenuAnimation = keyframes`
+  0% { transform: translateY(100%) }
+  50% { transform: translateY(-5%) }
+  100% { transform: translateY(0%) }
+`;
+
+export const cardClickedAnimation = (rotation = 0, isBullet = false) => (
+  keyframes`
+  0% { transform: rotate(${rotation}deg) scale(1.2); opacity: 1; z-index: 70;  }
+  25% { transform: rotate(0deg) translateY(-20px) scale(1.2); opacity: 1; z-index: 70;  }
+  50% { transform: translateY(-100px) rotate(0deg) scale(1.5);
+  opacity: ${isBullet ? '0' : '1'}; z-index: 70; }
+  100% { transform: translateY(-100px) translateX(700px) rotate(180deg) scale(1.5);
+  opacity: ${isBullet ? '0' : '0.75'}; z-index: 70; }
+`);
