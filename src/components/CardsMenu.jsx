@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import tw, { styled, css, theme } from 'twin.macro';
 import { maxWidth } from '../styles/variables';
 import { cardClickedAnimation, cardMenuAnimation } from '../styles/animations';
+
 import crosshair from '../assets/svg/crosshairCursor.svg';
 import bulletHole from '../assets/svg/bulletHole.png';
 import clubs from '../assets/svg/clubs.svg';
@@ -65,17 +66,17 @@ const BulletHole = styled.img(({ x, y, clicked }) => (
 
 const cardsData = {
   play: {
-    zIndex: 30, yIndex: 30, rotation: -12, scale: 1.025, title: 'Play', color: 'clubs', cardColor: clubs,
+    zIndex: 30, yIndex: 30, rotation: -12, scale: 1.025, title: 'Play', color: 'clubs', cardColor: clubs, link: 'play',
   },
   rules: {
-    zIndex: 20, yIndex: 0, rotation: 2, scale: 1, title: 'Rules', color: 'hearts', cardColor: hearts,
+    zIndex: 20, yIndex: 0, rotation: 2, scale: 1, title: 'Rules', color: 'hearts', cardColor: hearts, link: 'rules',
   },
   bestScores: {
-    zIndex: 10, yIndex: 50, rotation: 12, scale: 0.975, title: 'Best Scores', color: 'spades', cardColor: spades,
+    zIndex: 10, yIndex: 50, rotation: 12, scale: 0.975, title: 'Best Scores', color: 'spades', cardColor: spades, link: 'leaderboard',
   },
 };
 
-const Card = ({ cardName, setBulletPosition }) => {
+const Card = ({ cardName, setPage, setBulletPosition }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const hoveredData = { zIndex: isHovered ? 30 : 0, yIndex: isHovered ? -20 : 0, scale: isHovered ? 0.2 : 0 };
@@ -91,6 +92,7 @@ const Card = ({ cardName, setBulletPosition }) => {
       onClick={(e) => {
         setBulletPosition({ x: e.clientX, y: e.clientY });
         setIsClicked(!isClicked);
+        setTimeout(() => setPage(cardsData[cardName].link), 2800);
       }}
     >
       <CardColor src={cardsData[cardName].cardColor} position="top" alt="" />
@@ -100,13 +102,13 @@ const Card = ({ cardName, setBulletPosition }) => {
   );
 };
 
-const CardsMenu = () => {
+const CardsMenu = ({ setPage }) => {
   const [bulletPosition, setBulletPosition] = useState({ x: -35, y: -35 });
   return (
     <CardsContainer>
-      <Card cardName="play" setBulletPosition={setBulletPosition} />
-      <Card cardName="rules" setBulletPosition={setBulletPosition} />
-      <Card cardName="bestScores" setBulletPosition={setBulletPosition} />
+      <Card cardName="play" setBulletPosition={setBulletPosition} setPage={setPage} />
+      <Card cardName="rules" setBulletPosition={setBulletPosition} setPage={setPage} />
+      <Card cardName="bestScores" setBulletPosition={setBulletPosition} setPage={setPage} />
       <BulletHole
         src={bulletHole}
         alt="bullet hole"
@@ -120,7 +122,12 @@ const CardsMenu = () => {
 
 Card.propTypes = {
   cardName: PropTypes.string.isRequired,
+  setPage: PropTypes.func.isRequired,
   setBulletPosition: PropTypes.func.isRequired,
+};
+
+CardsMenu.propTypes = {
+  setPage: PropTypes.func.isRequired,
 };
 
 export default CardsMenu;

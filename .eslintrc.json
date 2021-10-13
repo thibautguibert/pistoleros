@@ -21,7 +21,7 @@
     ],
     "rules": {
         "max-len": [
-            "error",
+            "warn",
             120
         ],
         "max-lines": [

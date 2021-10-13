@@ -55,6 +55,15 @@ export const gunsToCenterAnimation = (position) => {
   `);
 };
 
+export const gunsToSpaceAroundAnimation = (position) => {
+  const direction = position === 'left' ? -1 : 1;
+  return (
+    keyframes`
+  0% { transform: translateX(${direction * 120}%) translateY(-120%) rotate(-360deg) }
+  100% { transform: translateX(0%) translateY(0%) rotate(${direction * 66}deg)}
+  `);
+};
+
 export const cardMenuAnimation = keyframes`
   0% { transform: translateY(100%) }
   50% { transform: translateY(-5%) }

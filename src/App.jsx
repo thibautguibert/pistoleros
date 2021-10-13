@@ -7,6 +7,9 @@ import { isMobile, maxWidth } from './styles/variables';
 import { doorAnimation } from './styles/animations';
 
 import saloonBackground from './assets/backgrounds/saloonBackground.jpg';
+import playBackground from './assets/backgrounds/playBackground.jpg';
+import rulesBackground from './assets/backgrounds/rulesBackground.jpg';
+import gameBackground from './assets/backgrounds/gameBackground.jpg';
 import saloonDoor from './assets/saloonDoor.png';
 
 const DoorsContainer = tw.div`relative h-full w-full flex items-center justify-between`;
@@ -30,24 +33,60 @@ const SaloonDoor = styled.img(({ position, animation }) => ([
   `,
 ]));
 
+const pageData = {
+  home: {
+    background: saloonBackground,
+    title: 'Pist leros',
+    hasBarillet: true,
+    gunsPosition: undefined,
+  },
+  menu: {
+    background: saloonBackground,
+    title: 'Pist leros',
+    hasBarillet: true,
+    gunsPosition: 'centered',
+  },
+  play: {
+    background: playBackground,
+    title: 'Play',
+    hasBarillet: false,
+    gunsPosition: 'space-around',
+  },
+  rules: {
+    background: rulesBackground,
+    title: 'Rules',
+    hasBarillet: false,
+    gunsPosition: 'space-around',
+  },
+  leaderboard: {
+    background: gameBackground,
+    title: 'Scores',
+    hasBarillet: false,
+    gunsPosition: 'space-around',
+  },
+};
+
 function App() {
-  const [doors, setDoors] = useState(true);
-  const [showMenu, setShowMenu] = useState(false);
+  const [doorsAnimation, setDoorsAnimation] = useState(false);
+  const [page, setPage] = useState('home');
   const transitionToMenu = () => {
-    setDoors(false);
-    setTimeout(() => setShowMenu(true), 2500);
+    setDoorsAnimation(true);
+    setTimeout(() => setPage('menu'), 2500);
   };
   return (
-    <PageContainer background={saloonBackground} bgOpacity={doors ? 0.25 : 0.75}>
-      <PageTitle title="Pist leros" hasBarillet gunsPosition={showMenu ? 'centered' : undefined} />
-      {showMenu ? (
-        <CardsMenu />
-      ) : (
+    <PageContainer background={pageData[page].background} bgOpacity={doorsAnimation ? 0.75 : 0.25}>
+      <PageTitle
+        title={pageData[page].title}
+        hasBarillet={pageData[page].hasBarillet}
+        gunsPosition={pageData[page].gunsPosition}
+      />
+      {page === 'home' && (
         <DoorsContainer onClick={transitionToMenu}>
-          <SaloonDoor src={saloonDoor} alt="saloon door" position="left" animation={!doors} />
-          <SaloonDoor src={saloonDoor} alt="saloon door" position="right" animation={!doors} />
+          <SaloonDoor src={saloonDoor} alt="saloon door" position="left" animation={doorsAnimation} />
+          <SaloonDoor src={saloonDoor} alt="saloon door" position="right" animation={doorsAnimation} />
         </DoorsContainer>
       )}
+      {page === 'menu' && <CardsMenu setPage={setPage} />}
     </PageContainer>
   );
 }
