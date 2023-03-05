@@ -73,37 +73,41 @@ const Gun = styled.img(({ position, gunsPosition }) => {
   );
 });
 
-const CurvedTitle = ({ title, animation }) => (
-  <Svg width={rootWidth} height={125 + rootWidth / 10} viewBox="0 0 300 10" animation={animation}>
-    <path
-      id="curve"
-      fill="transparent"
-      d="M1.70334 101C1.70334 48.6867 73.9199 1.59689 154.963 1.59689C236.005 1.59689 307.703 48.6867 307.703 101"
-    />
-    <SvgText>
-      <textPath xlinkHref="#curve" startOffset="50%" textAnchor="middle">
-        {title}
-      </textPath>
-    </SvgText>
-  </Svg>
-);
+function CurvedTitle({ title, animation }) {
+  return (
+    <Svg width={rootWidth} height={125 + rootWidth / 10} viewBox="0 0 300 10" animation={animation}>
+      <path
+        id="curve"
+        fill="transparent"
+        d="M1.70334 101C1.70334 48.6867 73.9199 1.59689 154.963 1.59689C236.005 1.59689 307.703 48.6867 307.703 101"
+      />
+      <SvgText>
+        <textPath xlinkHref="#curve" startOffset="50%" textAnchor="middle">
+          {title}
+        </textPath>
+      </SvgText>
+    </Svg>
+  );
+}
 
 CurvedTitle.propTypes = { title: PropTypes.string, animation: PropTypes.bool };
 CurvedTitle.defaultProps = { title: '', animation: false };
 
-const PageTitle = ({ title, hasBarillet, gunsPosition }) => (
-  <TitleContainer>
-    <TitlePaint src={titlePaint} alt="" />
-    {hasBarillet && <Barillet src={barillet} alt="" />}
-    <CurvedTitle title={title} animation={hasBarillet} />
-    {gunsPosition && (
+function PageTitle({ title, hasBarillet, gunsPosition }) {
+  return (
+    <TitleContainer>
+      <TitlePaint src={titlePaint} alt="" />
+      {hasBarillet && <Barillet src={barillet} alt="" />}
+      <CurvedTitle title={title} animation={hasBarillet} />
+      {gunsPosition && (
       <GunsContainer gunsPosition={gunsPosition}>
         <Gun position="left" gunsPosition={gunsPosition} src={leftGun} alt="" />
         <Gun position="right" gunsPosition={gunsPosition} src={rightGun} alt="" />
       </GunsContainer>
-    )}
-  </TitleContainer>
-);
+      )}
+    </TitleContainer>
+  );
+}
 
 PageTitle.propTypes = {
   title: PropTypes.string,

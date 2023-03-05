@@ -17,11 +17,13 @@ const CustomStyles = createGlobalStyle`
   }
 `;
 
-const GlobalStyles = () => (
-  <>
-    <BaseStyles />
-    <CustomStyles />
-  </>
-);
+function GlobalStyles() {
+  return (
+    <>
+      <BaseStyles />
+      <CustomStyles />
+    </>
+  );
+}
 
 export default GlobalStyles;

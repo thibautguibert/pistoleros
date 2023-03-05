@@ -18,12 +18,14 @@ const PageContainerStyle = styled.div(({ background, bgOpacity }) => [
     }`,
 ]);
 
-const PageContainer = ({ children, background, bgOpacity }) => (
-  <PageContainerStyle background={background} bgOpacity={bgOpacity}>
-    <TopRightPaint src={topRightPaint} alt="" />
-    {children}
-  </PageContainerStyle>
-);
+function PageContainer({ children, background, bgOpacity }) {
+  return (
+    <PageContainerStyle background={background} bgOpacity={bgOpacity}>
+      <TopRightPaint src={topRightPaint} alt="" />
+      {children}
+    </PageContainerStyle>
+  );
+}
 
 PageContainer.propTypes = {
   children: PropTypes.node.isRequired,

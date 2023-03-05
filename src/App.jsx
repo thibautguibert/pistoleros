@@ -3,6 +3,7 @@ import tw, { styled, css } from 'twin.macro';
 import PageContainer from './styles/PageContainer';
 import PageTitle from './components/PageTitle';
 import CardsMenu from './components/CardsMenu';
+import Rules from './pages/Rules';
 import { isMobile, maxWidth } from './styles/variables';
 import { doorAnimation } from './styles/animations';
 
@@ -87,6 +88,7 @@ function App() {
         </DoorsContainer>
       )}
       {page === 'menu' && <CardsMenu setPage={setPage} />}
+      {page === 'rules' && <Rules />}
     </PageContainer>
   );
 }

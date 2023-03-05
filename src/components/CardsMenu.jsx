@@ -66,17 +66,17 @@ const BulletHole = styled.img(({ x, y, clicked }) => (
 
 const cardsData = {
   play: {
-    zIndex: 30, yIndex: 30, rotation: -12, scale: 1.025, title: 'Play', color: 'clubs', cardColor: clubs, link: 'play',
+    zIndex: 30, yIndex: 30, rotation: -12, scale: 1.025, title: 'Play', color: 'clubs', cardColor: clubs, page: 'play',
   },
   rules: {
-    zIndex: 20, yIndex: 0, rotation: 2, scale: 1, title: 'Rules', color: 'hearts', cardColor: hearts, link: 'rules',
+    zIndex: 20, yIndex: 0, rotation: 2, scale: 1, title: 'Rules', color: 'hearts', cardColor: hearts, page: 'rules',
   },
   bestScores: {
-    zIndex: 10, yIndex: 50, rotation: 12, scale: 0.975, title: 'Best Scores', color: 'spades', cardColor: spades, link: 'leaderboard',
+    zIndex: 10, yIndex: 50, rotation: 12, scale: 0.975, title: 'Best Scores', color: 'spades', cardColor: spades, page: 'leaderboard',
   },
 };
 
-const Card = ({ cardName, setPage, setBulletPosition }) => {
+function Card({ cardName, setPage, setBulletPosition }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const hoveredData = { zIndex: isHovered ? 30 : 0, yIndex: isHovered ? -20 : 0, scale: isHovered ? 0.2 : 0 };
@@ -92,7 +92,7 @@ const Card = ({ cardName, setPage, setBulletPosition }) => {
       onClick={(e) => {
         setBulletPosition({ x: e.clientX, y: e.clientY });
         setIsClicked(!isClicked);
-        setTimeout(() => setPage(cardsData[cardName].link), 2800);
+        setTimeout(() => setPage(cardsData[cardName].page), 2800);
       }}
     >
       <CardColor src={cardsData[cardName].cardColor} position="top" alt="" />
@@ -100,9 +100,9 @@ const Card = ({ cardName, setPage, setBulletPosition }) => {
       <CardColor src={cardsData[cardName].cardColor} position="bottom" alt="" />
     </CardStyle>
   );
-};
+}
 
-const CardsMenu = ({ setPage }) => {
+function CardsMenu({ setPage }) {
   const [bulletPosition, setBulletPosition] = useState({ x: -35, y: -35 });
   return (
     <CardsContainer>
@@ -118,7 +118,7 @@ const CardsMenu = ({ setPage }) => {
       />
     </CardsContainer>
   );
-};
+}
 
 Card.propTypes = {
   cardName: PropTypes.string.isRequired,
